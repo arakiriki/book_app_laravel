@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class testcommand extends Command
+class TestCommand extends Command
 {
     /**
      * The name and signature of the console command.

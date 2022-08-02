@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 ./vendor/bin/sail composer phpcbf
-./vendor/bin/sail npm test
+./vendor/bin/sail test

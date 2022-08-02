@@ -22,4 +22,3 @@ Route::get('/', [ExampleController::class, 'index']);
 Route::get('/test', [ExampleController::class, 'index']);
 Route::get('/example', [ExampleController::class, 'example']);
 
-//

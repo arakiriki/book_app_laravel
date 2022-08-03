@@ -2,6 +2,7 @@
   <x-slot name="header">
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
           {{ __('本の管理') }}
+          <button onclick="location.href='/book/new/'" class="text-base ml-5 shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">新規作成</button> 
       </h2>
   </x-slot>
 

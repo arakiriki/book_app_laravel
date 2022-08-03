@@ -55,4 +55,31 @@ class BookController extends Controller
             return redirect('book')->withErrors($ex->getMessage());
         }
     }
+
+    public function new()
+    {
+        return view('book.new');
+    }
+
+    public function create(Request $request)
+    {
+        try {
+            Book::create($request->all());
+            return redirect('book')->with('status', '本を作成しました。');
+        } catch (\Exception $ex) {
+            logger($ex->getMessage());
+            return redirect('book')->withErrors($ex->getMessage());
+        }
+    }
+
+    public function remove($id)
+    {
+        try {
+            Book::find($id)->delete();
+            return redirect('book')->with('status', '本を削除しました。');
+        } catch (\Exception $ex) {
+            logger($ex->getMessage());
+            return redirect('book')->withErrors($ex->getMessage());
+        }
+    }
 }

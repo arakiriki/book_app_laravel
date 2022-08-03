@@ -5,15 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\Http\Requests\BookRequest;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $books = Book::all();
-        $books = Book::paginate(5);
+        $input = $request->all();
+        $books = Book::search($input)->orderBy('id', 'desc')->paginate(10);
+        $publications = Book::select('publication')->groupBy('publication')->pluck('publication');
+        $authors = Book::select('author')->groupBy('author')->pluck('author');
 
-        return view('book.index', [ 'books' => $books ]);
+        return view(
+            'book.index',
+            [
+                'books' => $books,
+                // selectboxの値
+                'publications' => $publications,
+                'authors' => $authors,
+
+                // 検索する値
+                'name' => $input['name'] ?? '',
+                'publication' => $input['publication'] ?? '',
+                'author' => $input['author'] ?? '',
+                'status' => $input['status'] ?? '',
+                'note' => $input['note'] ?? '',
+            ]
+        );
     }
 
     public function detail($id)
@@ -21,7 +41,7 @@ class BookController extends Controller
 
         $book = Book::find($id);
 
-        return view('book.detail', [ 'book' => $book ]);
+        return view('book.detail', ['book' => $book]);
     }
 
     public function edit($id)
@@ -29,12 +49,22 @@ class BookController extends Controller
 
         $book = Book::find($id);
 
-        return view('book.edit', [ 'book' => $book ]);
+        return view('book.edit', ['book' => $book]);
     }
 
-    public function update(Request $request)
+    public function update(BookRequest $request)
     {
         try {
+            //NOTE:コントローラーに対してバリデーションを当てる方法
+            // $validated = Validator::make($request->all(), [
+            //     'name' => 'required|max:255',
+            //     'status' => ['required', Rule::in(BOOK::BOOK_STATUS_ARRAY)],
+            // ]);
+
+            // if ($validated->fails()) {
+            //     return redirect()->route('book.edit', ['id' => $request->input('id')])->withErrors($validated)->withInput();
+            // }
+
             DB::beginTransaction();
 
             $book = Book::find($request->input('id'));

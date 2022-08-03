@@ -59,7 +59,7 @@
                           </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt class="text-sm font-medium text-gray-500">読み終わった日</dt>
+                          <dt class="text-sm font-medium text-gray-500">読破日</dt>
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <div class="col-span-6 sm:col-span-3">
                               <input type="text" name="read_at" id="read_at" value="" placeholder="例）2022-01-01" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">

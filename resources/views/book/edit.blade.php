@@ -29,8 +29,12 @@
                           <dt class="text-sm font-medium text-gray-500">名前</dt>
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <div class="col-span-6 sm:col-span-3">
-                              <input type="text" name="name" id="name" value="{{$book->name}}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              <input type="text" name="name" id="name" value="{{ old('name',$book->name)}}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              @error('name')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
+
                           </dd>
                         </div>
                         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -38,16 +42,22 @@
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <select id="status" name="status" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                               @foreach(App\Models\Book::BOOK_STATUS_OBJECT as $key => $value)
-                                <option value="{{ $key }}" @if($key === $book->status) selected @endif>{{ $value }}</option>
+                                <option value="{{ $key }}" @if($key === (int)old('status',$book->status)) selected @endif>{{ $value }}</option>
                               @endforeach
                             </select>
+                            @error('status')
+                            <div class="text-red-600">{{ $message }}</div>
+                            @enderror
                           </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                           <dt class="text-sm font-medium text-gray-500">著者</dt>
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <div class="col-span-6 sm:col-span-3">
-                              <input type="text" name="author" id="author" value="{{$book->author}}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              <input type="text" name="author" id="author" value="{{old('author',$book->author)}}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              @error('author')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </dd>
                         </div>
@@ -55,15 +65,21 @@
                           <dt class="text-sm font-medium text-gray-500">出版社</dt>
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <div class="col-span-6 sm:col-span-3">
-                              <input type="text" name="publication" id="publication" value="{{$book->publication}}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              <input type="text" name="publication" id="publication" value="{{old('publication',$book->publication)}}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              @error('publication')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </dd>
                         </div>
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                          <dt class="text-sm font-medium text-gray-500">読み終わった日</dt>
+                          <dt class="text-sm font-medium text-gray-500">読破日</dt>
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <div class="col-span-6 sm:col-span-3">
-                              <input type="text" name="read_at" id="read_at" value="{{$book->read_at}}" placeholder="例）2022-01-01" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              <input type="text" name="read_at" id="read_at" value="{{old('read_at',$book->read_at)}}" placeholder="例）2022-01-01" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                              @error('read_at')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </dd>
                         </div>
@@ -71,7 +87,10 @@
                           <dt class="text-sm font-medium text-gray-500">メモ</dt>
                           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <div class="mt-1">
-                              <textarea id="note" name="note" rows="5" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">{{$book->note}}"</textarea>
+                              <textarea id="note" name="note" rows="5" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">{{old('note',$book->note)}}"</textarea>
+                              @error('note')
+                              <div class="text-red-600">{{ $message }}</div>
+                              @enderror
                             </div>
                           </dd>
                         </div>

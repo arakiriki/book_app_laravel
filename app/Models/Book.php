@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['name', 'status', 'author', 'publication', 'read_at', 'note'];
 
     /**
      * id:一意（autoincrement）,not null

@@ -39,7 +39,7 @@ class BookController extends Controller
     public function detail($id)
     {
 
-        $book = Book::find($id);
+        $book = Book::findOrFail($id);
 
         return view('book.detail', ['book' => $book]);
     }
@@ -47,7 +47,7 @@ class BookController extends Controller
     public function edit($id)
     {
 
-        $book = Book::find($id);
+        $book = Book::findOrFail($id);
 
         return view('book.edit', ['book' => $book]);
     }
@@ -91,7 +91,7 @@ class BookController extends Controller
         return view('book.new');
     }
 
-    public function create(Request $request)
+    public function create(BookRequest $request)
     {
         try {
             Book::create($request->all());
@@ -105,11 +105,11 @@ class BookController extends Controller
     public function remove($id)
     {
         try {
-            Book::find($id)->delete();
+            Book::findOrFail($id)->delete();
             return redirect('book')->with('status', '本を削除しました。');
         } catch (\Exception $ex) {
             logger($ex->getMessage());
-            return redirect('book')->withErrors($ex->getMessage());
+            abort(404);
         }
     }
 }

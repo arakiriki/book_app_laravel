@@ -131,7 +131,7 @@ return [
         'name' => '名前',
         'author' => '著者',
         'publication' => '出版',
-        'read_at' => '読み終わった日',
+        'read_at' => '読破日',
         'note' => 'メモ',
     ],
 ];

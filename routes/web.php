@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +14,28 @@ use App\Http\Controllers\ExampleController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/', [ExampleController::class, 'index']);
-Route::get('/test', [ExampleController::class, 'index']);
-Route::get('/example', [ExampleController::class, 'example']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+
+
+Route::middleware(['auth'])->prefix('book')->group(function () {
+    Route::get('/', [BookController::class, 'index'])->name('book');
+    Route::get('/detail/{id}', [BookController::class, 'detail'])->name('book.detail');
+    Route::get('/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
+    Route::get('/new', [BookController::class, 'new'])->name('book.new');
+
+    Route::post('/create', [BookController::class, 'create'])->name('book.create');
+
+    Route::delete('/remove/{id}', [BookController::class, 'remove'])->name('book.remove');
+
+    Route::patch('/update', [BookController::class, 'update'])->name('book.update');
+});
+
+
+require __DIR__.'/auth.php';
